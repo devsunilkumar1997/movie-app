@@ -1,0 +1,19 @@
+import 'package:dartz/dartz.dart';
+import 'package:movieapp/domain/entities/movie_params.dart';
+
+import '../app_error.dart';
+import '../repository/movie_repository.dart';
+import '../video_entity.dart';
+import 'usecase.dart';
+
+class GetVideos extends UseCase<List<VideoEntity>, MovieParams> {
+  final MovieRepository repository;
+
+  GetVideos(this.repository);
+
+  @override
+  Future<Either<AppError, List<VideoEntity>>> call(
+      MovieParams movieParams) async {
+    return await repository.getVideos(movieParams.id);
+  }
+}
